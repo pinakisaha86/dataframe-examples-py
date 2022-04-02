@@ -42,7 +42,6 @@ if __name__ == '__main__':
         .map(lambda line: line.split(",")) \
         .map(lambda lst: (int(lst[0]), (strtobool(lst[1]), strtobool(lst[2]), strtobool(lst[3]), int(lst[4]))))
 
-    print('Participants belongs to \'Switzerland\', having debts and financial dependents,')
     join_pair_rdd = demographics_pair_rdd \
         .join(finances_pair_rdd)
 
@@ -50,8 +49,11 @@ if __name__ == '__main__':
     for rec in join_pair_rdd.collect():
         print(rec)
 
-    join_pair_rdd = join_pair_rdd.filter(lambda rec: (rec[1][0][2] == "Switzerland") and (rec[1][1][0] == 1) and (rec[1][1][1] == 1)) \
+    join_pair_rdd = join_pair_rdd.filter(lambda rec: (rec[1][0][2] == "Switzerland") and (rec[1][1][0] == 1) and (rec[1][1][1] == 1))
 
-    join_pair_rdd.foreach(print)
+    #join_pair_rdd.foreach(print)
+    print('Participants belongs to \'Switzerland\', having debts and financial dependents,')
+    for rec in join_pair_rdd.collect():
+        print(rec)
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" rdd/scholaship_recipient_join_filter.py
