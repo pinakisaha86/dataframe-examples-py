@@ -77,8 +77,9 @@ if __name__ == '__main__':
         .filter(omo_daily_freq["OMODailyFreq"] > 10 ) \
         .repartition(5) \
         .write \
+        .option("header","true") \
         .mode("overwrite") \
-        .parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/nyc_omo_data")
+        .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/nyc_omo_data")
 
     spark.stop()
 
