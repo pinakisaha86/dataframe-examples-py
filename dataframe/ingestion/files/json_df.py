@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import explode,col
+from pyspark.sql.functions import explode, col
 import os.path
 import yaml
 

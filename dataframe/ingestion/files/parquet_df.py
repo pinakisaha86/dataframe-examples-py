@@ -74,6 +74,7 @@ if __name__ == '__main__':
         .show(5)
 
     omo_daily_freq \
+        .filter(omo_daily_freq["OMODailyFreq"] > 10 ) \
         .repartition(5) \
         .write \
         .mode("overwrite") \

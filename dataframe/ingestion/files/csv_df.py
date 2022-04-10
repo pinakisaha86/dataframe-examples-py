@@ -42,6 +42,7 @@ if __name__ == '__main__':
         .format("csv") \
         .schema(fin_schema) \
         .load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/finances.csv")
+        # quote, dateformat - yyyy-MM-dd, yyyy-MM-dd HH:mm:ss, nullString - NA, null, NULL, inferSchema - true
 
     fin_df.printSchema()
     fin_df.show()
