@@ -1,5 +1,5 @@
 s3_conf:
-  s3_bucket: pinaki-bigdata
+    s3_bucket: pinaki-bigdata
 
 sftp_conf:
     filetype: csv
