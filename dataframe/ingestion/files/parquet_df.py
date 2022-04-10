@@ -34,6 +34,8 @@ if __name__ == '__main__':
         .parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/NYC_OMO") \
         .repartition(5)
 
+    nyc_omo_df.write.partitionBy("Boro").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/nyc_omo_data_tmp")
+
     print("# of records = " + str(nyc_omo_df.count()))
     print("# of partitions = " + str(nyc_omo_df.rdd.getNumPartitions))
 
