@@ -47,6 +47,10 @@ if __name__ == '__main__':
         .show(5, False)
 
     finance_df\
+        .select('AccountNumber', concat_ws(" - ", "AccountNumber", "Description").alias("AccountDetails"))\
+        .show(5, False)
+
+    finance_df\
         .withColumn("AccountDetails", concat_ws(" - ", "AccountNumber", "Description"))\
         .show(5, False)
 
