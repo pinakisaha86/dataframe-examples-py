@@ -37,4 +37,4 @@ if __name__ == '__main__':
     demographics_rdd.show(5)
     finances_rdd.show(5)
 
-    # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" rdd/scholaship_recipient_cartesian_filter1.py
+#spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" rdd/scholaship_recipient_cartesian_filter1.py
