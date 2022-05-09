@@ -54,7 +54,7 @@ if __name__ == '__main__':
         .option("header", "false") \
         .option("delimiter", ",") \
         .option("inferSchema", "true") \
-        .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/finances.csv") \
+        .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/finances1.csv") \
         .toDF("id", "has_debt", "has_financial_dependents", "has_student_loans", "income")
 
     print("Number of partitions = " + str(fin_df.rdd.getNumPartitions()))
