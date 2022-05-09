@@ -36,13 +36,15 @@ if __name__ == '__main__':
 
     demographics_pair_rdd = demographics_rdd \
         .map(lambda line: line.split(",")) \
-        .map(lambda lst: (int(lst[0]), int(lst[1]), strtobool(lst[2]), lst[3], lst[4], strtobool(lst[5]), strtobool(lst[6]), int(lst[7])))
+        .map(lambda lst: (int(lst[0]), int(lst[1]), strtobool(lst[2]), lst[3], lst[4], strtobool(lst[5]), strtobool(lst[6]), int(lst[7]))) \
+        .take(5)
 
     finances_pair_rdd = finances_rdd \
         .map(lambda line: line.split(",")) \
-        .map(lambda lst: (int(lst[0]), strtobool(lst[1]), strtobool(lst[2]), strtobool(lst[3]), int(lst[4])))
+        .map(lambda lst: (int(lst[0]), strtobool(lst[1]), strtobool(lst[2]), strtobool(lst[3]), int(lst[4]))) \
+        .take(5)
 
-    demographics_pair_rdd.take(5)
-    finances_pair_rdd.take(5)
+    #demographics_pair_rdd.take(5)
+   #finances_pair_rdd.take(5)
 
 #spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" rdd/scholaship_recipient_cartesian_filter1.py
