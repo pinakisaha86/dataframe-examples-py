@@ -42,7 +42,7 @@ if __name__ == '__main__':
         .map(lambda line: line.split(",")) \
         .map(lambda lst: (int(lst[0]), strtobool(lst[1]), strtobool(lst[2]), strtobool(lst[3]), int(lst[4])))
 
-    demographics_rdd.show()
-    finances_rdd.show()
+    demographics_rdd.take(10)
+    finances_rdd.take(10)
 
 #spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" rdd/scholaship_recipient_cartesian_filter1.py
