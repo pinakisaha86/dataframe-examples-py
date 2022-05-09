@@ -34,6 +34,14 @@ if __name__ == '__main__':
     demographics_rdd = spark.sparkContext.textFile("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/demographic.csv")
     finances_rdd = spark.sparkContext.textFile("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/finances.csv")
 
+    demographics_pair_rdd = demographics_rdd \
+        .map(lambda line: line.split(",")) \
+        .map(lambda lst: (int(lst[0]), int(lst[1]), strtobool(lst[2]), lst[3], lst[4], strtobool(lst[5]), strtobool(lst[6]), int(lst[7])))
+
+    finances_pair_rdd = finances_rdd \
+        .map(lambda line: line.split(",")) \
+        .map(lambda lst: (int(lst[0]), strtobool(lst[1]), strtobool(lst[2]), strtobool(lst[3]), int(lst[4])))
+
     demographics_rdd.show(5)
     finances_rdd.show(5)
 
