@@ -48,7 +48,7 @@ fin_df.show()
 fin_df \
         .write \
         .option("header", "true") \
-        .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin1")
+        .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin2")
 
 spark.stop()
 
