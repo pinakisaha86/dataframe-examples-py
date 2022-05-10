@@ -29,7 +29,15 @@ if __name__ == '__main__':
 
     print("\nCreating dataframe ingestion CSV file using 'SparkSession.read.format()'")
 
-fin_df=spark.read.csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/finances.csv", inferSchema=True, header=True)
+  fin_schema = StructType() \
+        .add("id", IntegerType(), True) \
+        .add("has_debt", BooleanType(), True) \
+        .add("has_financial_dependents", BooleanType(), True) \
+        .add("has_student_loans", BooleanType(), True) \
+        .add("income", DoubleType(), True)
+
+
+fin_df=spark.read.csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/finances.csv", delimiter =",",schema="fin_schema", header="false")
 fin_df.show()
 
 #spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df1.py
