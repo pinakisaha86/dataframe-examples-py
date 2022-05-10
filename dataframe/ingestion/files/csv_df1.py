@@ -37,7 +37,7 @@ fin_schema = StructType() \
         .add("income", DoubleType(), True)
 
 fin_df = spark.read \
-    .option("header", "false") \
+    .option("header", "true") \
     .option("delimiter", ",") \
     .format("csv") \
     .schema(fin_schema) \
@@ -48,7 +48,8 @@ fin_df.show()
 fin_df \
         .write \
         .option("header", "true") \
-        .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin2")
+        .option("delimiter","," ) \
+        .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin3")
 
 spark.stop()
 
