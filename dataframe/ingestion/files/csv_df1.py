@@ -37,7 +37,7 @@ fin_schema = StructType() \
         .add("income", DoubleType(), True)
 
 fin_df = spark.read \
-    .option("header", "true") \
+    .option("header", "false") \
     .option("delimiter", ",") \
     .format("csv") \
     .schema(fin_schema) \
