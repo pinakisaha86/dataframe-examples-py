@@ -1,4 +1,4 @@
-rom pyspark.sql import SparkSession
+from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, IntegerType, BooleanType,DoubleType
 import os.path
 import yaml
@@ -31,3 +31,5 @@ if __name__ == '__main__':
 
 fin_df=spark.read.csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/finances.csv")
 fin_df.show()
+
+#spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df1.py
