@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
 fea_schema = StructType() \
         .add("Store", IntegerType(), True) \
-        .add("Date", string(nullable = true), True) \
+        .add("Date", string(nullable = True)) \
         .add("Temperature", string(), True) \
         .add("Fuel_Price", string(), True) \
         .add("MarkDown1", string(), True) \
