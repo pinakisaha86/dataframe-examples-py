@@ -38,4 +38,6 @@ features_df = spark.read \
 features_df.printSchema()
 features_df.limit(3).show()
 
+features_df.write.partitionBy("Fuel_Price").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features_df")
+
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df2.py
