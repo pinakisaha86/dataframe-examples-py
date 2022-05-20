@@ -39,6 +39,14 @@ features_df = spark.read \
 
 features_df.limit(3).show()
 
-features_df.write.partitionBy("Fuel_Price").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features_df")
+#features_df.write.partitionBy("Fuel_Price").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features_df")
+features_df\
+        .repartition(2) \
+        .write \
+        .partitionBy("Fuel_Price") \
+        .mode("overwrite") \
+        .option("header", "true") \
+        .option("delimiter", "~") \
+        .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features")
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df2.py
