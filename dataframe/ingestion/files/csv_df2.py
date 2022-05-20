@@ -29,12 +29,34 @@ if __name__ == '__main__':
 
     print("\nCreating dataframe ingestion CSV file using 'SparkSession.read.format()'")
 
+fea_schema = StructType() \
+        .add("Store", IntegerType(), True) \
+        .add("Date", string(), True) \
+        .add("Temperature", string(), True) \
+        .add("Fuel_Price", string(), True) \
+        .add("MarkDown1", string(), True) \
+		.add("MarkDown2", string(), True) \
+        .add("MarkDown3", string(), True) \
+        .add("MarkDown4", string(), True) \
+        .add("MarkDown5", string(), True) \
+		.add("CPI", string(), True) \
+        .add("Unemployment", string(), True) \
+        .add("IsHoliday", string(), True)
+
 features_df = spark.read \
-        .option("mode", "DROPMALFORMED") \
         .option("header", "false") \
         .option("delimiter", ",") \
-        .option("inferSchema", "true") \
-        .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features.csv")
+        .format("csv") \
+        .schema(fea_schema) \
+        .load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features.csv")
+
+#   features_df = spark.read \
+#        .option("mode", "DROPMALFORMED") \
+#        .option("header", "false") \
+#        .option("delimiter", ",") \
+#        .option("inferSchema", "true") \
+#        .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features.csv")
+
 features_df.printSchema()
 
 features_df.limit(3).show()
@@ -43,10 +65,10 @@ features_df.limit(3).show()
 #features_df\
 #        .repartition(2) \
 #        .write \
- #       .partitionBy("_c0") \
-  #      .mode("overwrite") \
-   #     .option("header", "true") \
-    #    .option("delimiter", ",") \
-     #   .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features")
+#        .partitionBy("_c0") \
+#        .mode("overwrite") \
+#        .option("header", "true") \
+#        .option("delimiter", ",") \
+#        .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features")
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df2.py
