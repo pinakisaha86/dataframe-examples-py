@@ -43,7 +43,7 @@ features_df.limit(3).show()
 features_df\
         .repartition(2) \
         .write \
-        .partitionBy("Fuel_Price") \
+        .partitionBy("_c3") \
         .mode("overwrite") \
         .option("header", "true") \
         .option("delimiter", ",") \
