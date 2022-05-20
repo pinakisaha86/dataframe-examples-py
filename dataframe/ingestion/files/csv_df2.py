@@ -35,7 +35,8 @@ features_df = spark.read \
         .option("delimiter", ",") \
         .option("inferSchema", "true") \
         .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features.csv")
-features_df.printSchema()
+#features_df.printSchema()
+
 features_df.limit(3).show()
 
 features_df.write.partitionBy("Fuel_Price").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features_df")
