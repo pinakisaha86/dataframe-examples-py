@@ -50,17 +50,17 @@ if __name__ == '__main__':
 #        .schema(fea_schema) \
 #        .load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features.csv")
 
-  features_df = spark.read \
+    features_df = spark.read \
         .option("mode", "DROPMALFORMED") \
         .option("header", "true") \
         .option("delimiter", ",") \
         .option("inferSchema", "true") \
         .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features.csv")
 
-features_df.printSchema()
+    features_df.printSchema()
 
 
-features_df.limit(3).show()
+    features_df.limit(3).show()
 
 #features_df.write.partitionBy("_c0").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features_df")
 #features_df\
