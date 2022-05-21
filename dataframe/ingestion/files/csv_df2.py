@@ -62,14 +62,15 @@ if __name__ == '__main__':
 
     features_df.limit(3).show()
 
-#features_df.write.partitionBy("_c0").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features_df")
-    features_df \
-       .repartition(2) \
-       .write \
-       .partitionBy("Store") \
-       .mode("overwrite") \
-       .option("header", "true") \
-       .option("delimiter", ",") \
-       .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features1")
+    features_df.write.partitionBy("Store").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features_df2")
+
+#    features_df \
+       #.repartition(2) \
+#       .write \
+#       .partitionBy("Store") \
+#       .mode("overwrite") \
+#       .option("header", "true") \
+#       .option("delimiter", ",") \
+#       .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features1")
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df2.py
