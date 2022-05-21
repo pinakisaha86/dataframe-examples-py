@@ -43,19 +43,19 @@ if __name__ == '__main__':
 #        .add("Unemployment", string(), True) \
 #        .add("IsHoliday", string(), True)
 
-features_df = spark.read \
+#features_df = spark.read \
+#        .option("header", "true") \
+#       .option("delimiter", ",") \
+#       .format("csv") \
+#        .schema(fea_schema) \
+#        .load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features.csv")
+
+  features_df = spark.read \
+        .option("mode", "DROPMALFORMED") \
         .option("header", "true") \
         .option("delimiter", ",") \
-        .format("csv") \
-#        .schema(fea_schema) \
-        .load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features.csv")
-
-#   features_df = spark.read \
-#        .option("mode", "DROPMALFORMED") \
-#        .option("header", "true") \
-#        .option("delimiter", ",") \
-#        .option("inferSchema", "true") \
-#        .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features.csv")
+        .option("inferSchema", "true") \
+        .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features.csv")
 
 features_df.printSchema()
 
