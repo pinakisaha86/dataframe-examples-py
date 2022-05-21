@@ -63,7 +63,7 @@ if __name__ == '__main__':
     features_df.limit(3).show()
 
 #features_df.write.partitionBy("_c0").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features_df")
-    features_df\
+    features_df \
 #       .repartition(2) \
        .write \
        .partitionBy("Store") \
