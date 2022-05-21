@@ -29,9 +29,9 @@ if __name__ == '__main__':
 
     print("\nCreating dataframe ingestion CSV file using 'SparkSession.read.format()'")
 
-fea_schema = StructType() \
+#fea_schema = StructType() \
 #        .add("Store", IntegerType(), True) \
-#        .add("Date", string(),True) \
+#          .add("Date", string(),True) \
 #        .add("Temperature", string(), True) \
 #        .add("Fuel_Price", string(), True) \
 #        .add("MarkDown1", string(), True) \
@@ -42,30 +42,17 @@ fea_schema = StructType() \
 #		.add("CPI", string(), True) \
 #        .add("Unemployment", string(), True) \
 #        .add("IsHoliday", string(), True)
-Store: string (nullable = true)
-Date: string (nullable = true)
-Temperature: string (nullable = true)
-Fuel_Price: string (nullable = true)
-MarkDown1: string (nullable = true)
-MarkDown2: string (nullable = true)
-MarkDown3: string (nullable = true)
-MarkDown4: string (nullable = true)
-MarkDown5: string (nullable = true)
-CPI: string (nullable = true)
-Unemployment: string (nullable = true)
-IsHoliday: string (nullable = true)
-
 
 features_df = spark.read \
-        .option("header", "false") \
+        .option("header", "true") \
         .option("delimiter", ",") \
         .format("csv") \
-        .schema(fea_schema) \
+#        .schema(fea_schema) \
         .load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features.csv")
 
 #   features_df = spark.read \
 #        .option("mode", "DROPMALFORMED") \
-#        .option("header", "false") \
+#        .option("header", "true") \
 #        .option("delimiter", ",") \
 #        .option("inferSchema", "true") \
 #        .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features.csv")
@@ -74,7 +61,7 @@ features_df.printSchema()
 
 features_df.limit(3).show()
 
-#features_df.write.partitionBy("Fuel_Price").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features_df")
+#features_df.write.partitionBy("_c0").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features_df")
 #features_df\
 #        .repartition(2) \
 #        .write \
