@@ -62,7 +62,7 @@ if __name__ == '__main__':
 
     features_df.limit(3).show()
 
-    features_df.write.partitionBy("Store").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features_df2")
+    features_df.write.partitionBy("Store").option("header", "true").option("delimiter", ",").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/features_df3")
 
 #    features_df \
        #.repartition(2) \
