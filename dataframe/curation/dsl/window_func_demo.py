@@ -48,6 +48,7 @@ if __name__ == '__main__':
     accNumPrev4WindowSpecTemp = Window.partitionBy("AccountNumber")\
         .orderBy("Date")
 
+
     financeDf\
         .withColumn("Date", to_date(from_unixtime(unix_timestamp("Date", "MM/dd/yyyy"))))\
         .withColumn("RollingAvg", avg("Amount").over(accNumPrev4WindowSpecTemp))\
