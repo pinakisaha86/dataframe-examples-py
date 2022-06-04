@@ -50,6 +50,11 @@ if __name__ == '__main__':
         .withColumn("txn_avg", avg("Amount").over(Window.partitionBy("AccountNumber")))\
         .show(20, False)
 
+    financeDf\
+        .withColumn("Date", to_date(from_unixtime(unix_timestamp("Date", "MM/dd/yyyy"))))\
+        .withColumn("txn_avg", avg("Amount").over(Window.partitionBy("AccountNumber").orderBy("Date").rowsBetween(Window.UNBOUNDED, 0)))\
+        .show(20, False)
+
     productList = [
         Product("Thin", "Cell phone", 6000),
         Product("Normal", "Tablet", 1500),
