@@ -52,7 +52,7 @@ if __name__ == '__main__':
 
     financeDf\
         .withColumn("Date", to_date(from_unixtime(unix_timestamp("Date", "MM/dd/yyyy"))))\
-        .withColumn("txn_avg", avg("Amount").over(Window.partitionBy("AccountNumber").orderBy("Date").rowsBetween(Window.UNBOUNDED, 0)))\
+        .withColumn("txn_avg", avg("Amount").over(Window.partitionBy("AccountNumber").orderBy("Date").rowsBetween(Window.unboundedPreceding, 0)))\
         .show(20, False)
 
     productList = [
