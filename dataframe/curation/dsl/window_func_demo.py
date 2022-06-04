@@ -80,6 +80,8 @@ if __name__ == '__main__':
                 "revenue",
                 lag("revenue", 1).over(catRevenueWindowSpec).alias("prevRevenue"),
                 lag("revenue", 2, 0).over(catRevenueWindowSpec).alias("prev2Revenue"),
+                lead("revenue", 1).over(catRevenueWindowSpec).alias("nextRevenue"),
+                lead("revenue", 2, 0).over(catRevenueWindowSpec).alias("next2Revenue"),
                 row_number().over(catRevenueWindowSpec).alias("row_number"),
                 rank().over(catRevenueWindowSpec).alias("rev_rank"),
                 dense_rank().over(catRevenueWindowSpec).alias("rev_dense_rank")) \
