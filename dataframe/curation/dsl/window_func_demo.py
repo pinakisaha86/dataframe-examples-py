@@ -45,13 +45,9 @@ if __name__ == '__main__':
         .withColumn("RollingAvg", avg("Amount").over(accNumPrev4WindowSpec))\
         .show(20, False)
 
-    accNumPrev4WindowSpecTemp = Window.partitionBy("AccountNumber")\
-        .orderBy("Date")
-
-
     financeDf\
         .withColumn("Date", to_date(from_unixtime(unix_timestamp("Date", "MM/dd/yyyy"))))\
-        .withColumn("RollingAvg", avg("Amount").over(accNumPrev4WindowSpecTemp))\
+        .withColumn("txn_avg", avg("Amount").over(Window.partitionBy("AccountNumber").orderBy("Date")))\
         .show(20, False)
 
     productList = [
