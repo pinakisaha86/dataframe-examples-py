@@ -39,7 +39,7 @@ if __name__ == '__main__':
 
 df2 = spark.read.option("header", "true").option("delimiter", "|").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/user_info.csv")
 
-rem_dup =df2.dropduplicate(email_id)
+rem_dup =df2.dropDuplicates(email_id)
 
 #df1.show()
 
