@@ -50,4 +50,8 @@ rem_dup.show(20,False)
 
 fin_df= rem_dup.filter(col("email_id").contains("punit"))
 fin_df.show(10,False)
+
+res= fin_df.select(concat_ws(" - ", "email_id", "mobile").alias("contact"))
+res.show(10,False)
+
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df3.py
