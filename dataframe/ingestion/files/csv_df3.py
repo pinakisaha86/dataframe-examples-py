@@ -42,7 +42,7 @@ df2 = spark.read.option("header", "true").option("delimiter", "|").csv("s3a://" 
 
 df2.show(20,False)
 
-rem_dup =df2.dropDuplicates(subset=["email_id"])
+rem_dup =df2.dropDuplicates(subset=["email_id","create_time"])
 
 #df1.show()
 
