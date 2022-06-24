@@ -32,6 +32,8 @@ if __name__ == '__main__':
 
 
 df = spark.read.format("csv").load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/cust_name.csv")
+
+df = spark.read.format("csv").load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/user_info.csv")
 df.show()
 
 
