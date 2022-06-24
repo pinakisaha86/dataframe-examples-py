@@ -35,9 +35,9 @@ if __name__ == '__main__':
 
 #df =spark.read.option("header", "true").csv(path)
 
-df1 = spark.read.option("header"= "true").format("csv").load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/cust_name.csv")
+df1 = spark.read.option("header", "true").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/cust_name.csv")
 
-df2 = spark.read.option("header"= "true").format("csv").load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/user_info.csv")
+df2 = spark.read.option("header", "true").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/user_info.csv")
 
 df1.show()
 
