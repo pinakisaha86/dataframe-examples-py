@@ -31,8 +31,7 @@ if __name__ == '__main__':
     print("\nCreating dataframe ingestion CSV file using 'SparkSession.read.format()'")
 
 
-df = spark.read.format("csv")
-                  .load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/cust_name.csv")
+df = spark.read.format("csv").load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/cust_name.csv")
 df.show()
 
 
