@@ -42,11 +42,11 @@ df2 = spark.read.option("header", "true").option("delimiter", "|").csv("s3a://" 
 
 df2.show(20,False)
 
-#rem_dup =df2.dropDuplicates(col("email_id"))
+rem_dup =df2.dropDuplicates(subset=["email_id"])
 
 #df1.show()
 
-#rem_dup.show(20,False)
+rem_dup.show(20,False)
 
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df3.py
