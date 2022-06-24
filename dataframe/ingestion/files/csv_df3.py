@@ -48,5 +48,6 @@ rem_dup =df2.dropDuplicates(subset=["email_id","create_time"])
 
 rem_dup.show(20,False)
 
-
+fin_df= rem_dup.filter(col("email_id").contains("punit"))
+fin_df.show()
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df3.py
