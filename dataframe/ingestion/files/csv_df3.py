@@ -35,13 +35,15 @@ if __name__ == '__main__':
 
 #df =spark.read.option("header", "true").csv(path)
 
-df1 = spark.read.option("header", "true").option("delimiter", "~").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/cust_name.csv")
+#df1 = spark.read.option("header", "true").option("delimiter", "~").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/cust_name.csv")
 
 df2 = spark.read.option("header", "true").option("delimiter", "|").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/user_info.csv")
 
-df1.show()
+rem_dup =df2.dropduplicate(email_id)
 
-df2.limit(10).show()
+#df1.show()
+
+rem_dup.limit(10).show()
 
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/ingestion/files/csv_df3.py
