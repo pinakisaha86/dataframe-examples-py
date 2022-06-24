@@ -30,14 +30,15 @@ if __name__ == '__main__':
 
     print("\nCreating dataframe ingestion CSV file using 'SparkSession.read.format()'")
 
-path= ["s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/cust_name.csv",
-        "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/user_info.csv"]
+#path= ["s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/cust_name.csv",
+#        "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/user_info.csv"]
 
-df =spark.read.option("header", "true").csv(path)
+#df =spark.read.option("header", "true").csv(path)
 
-#df = spark.read.option("header"=True).format("csv").load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/cust_name.csv")
+df1 = spark.read.option("header"=True).format("csv").load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/cust_name.csv")
 
-#df = spark.read.option("header"=True).format("csv").load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/user_info.csv")
+df2 = spark.read.option("header"=True).format("csv").load("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/user_info.csv")
+
 df.show()
 
 
