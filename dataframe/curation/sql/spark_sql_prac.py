@@ -42,7 +42,11 @@ if __name__ == '__main__':
 
 finance_df= spark.sql("select * from finances order by amount").show(5, False)
 
-finance_df.write.csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin_out")
+finance_df.write \
+    .mode("overwrite") \
+    .option("header", "true") \
+    .option("delimiter", ",") \
+    .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin_out")
 
 
 
