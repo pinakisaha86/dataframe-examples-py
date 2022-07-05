@@ -37,8 +37,8 @@ if __name__ == '__main__':
     finance_df.printSchema()
     finance_df.show(5, False)
 
-    finance_df.orderBy("Date").show(6)
-    finance_df.groupBy("AccountNumber").show(10, False)
+   # finance_df.orderBy("Date").show(6)
+    finance_df.groupBy("AccountNumber").orderBy("Date").show(6)
 
 
 
