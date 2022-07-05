@@ -35,14 +35,16 @@ if __name__ == '__main__':
     finance_df = spark.read.parquet(fin_file_path)
     finance_df.createOrReplaceTempView("finances")
     finance_df.printSchema()
-    finance_df.show(5, False)
+
 
    # finance_df.orderBy("Date").show(6)
    # finance_df.groupBy("AccountNumber").orderBy("Date").show(6)
 
-fin_out= spark.sql("select * from finances order by amount").show(5, False)
+finance_df= spark.sql("select * from finances order by amount").show(5, False)
 
-#fin_out.write.option("header", "true").option("delimiter", ",").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin_out")
+finance_df.show(5, False)
+
+finance_df.write.csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin_out")
 
 
 
