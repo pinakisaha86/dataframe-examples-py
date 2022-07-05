@@ -36,5 +36,5 @@ if __name__ == '__main__':
 
     finance_df.printSchema()
     finance_df.show(5, False)
-# spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/curation/dsl/spark_sql_prac.py
+# spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/curation/sql/spark_sql_prac.py
 
