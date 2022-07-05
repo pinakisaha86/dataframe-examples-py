@@ -40,7 +40,7 @@ if __name__ == '__main__':
    # finance_df.orderBy("Date").show(6)
    # finance_df.groupBy("AccountNumber").orderBy("Date").show(6)
 
-finance_df= spark.sql("select * from finances order by amount").show(5, False)
+finance_df= spark.sql("select * from finances order by amount")
 
 finance_df.write \
     .mode("overwrite") \
