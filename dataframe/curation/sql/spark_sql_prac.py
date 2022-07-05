@@ -33,7 +33,7 @@ if __name__ == '__main__':
 
     fin_file_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/finances-small"
     finance_df = spark.read.parquet(fin_file_path)
-
+    finance_df.createOrReplaceTempView("finances")
     finance_df.printSchema()
     finance_df.show(5, False)
 
