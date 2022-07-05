@@ -46,8 +46,10 @@ finance_df.write \
     .mode("overwrite") \
     .option("header", "true") \
     .option("delimiter", ",") \
-    .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin_out")
+    .format('.csv') \
+    .save("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin_out")
 
+#.csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin_out")
 
 
 
