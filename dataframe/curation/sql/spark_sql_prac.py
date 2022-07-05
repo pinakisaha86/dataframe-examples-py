@@ -42,7 +42,7 @@ if __name__ == '__main__':
 
 finance_df= spark.sql("select * from finances order by amount LIMIT 5")
 #finance_df.show()
-finance_df.repartition(1).write.mode("overwrite").option("header","true").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin_out2")
+finance_df.repartition(1).write.mode("overwrite").option("header","true").option("delimiter","|").csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin_out2")
 
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/curation/sql/spark_sql_prac.py
