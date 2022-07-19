@@ -39,7 +39,7 @@ if __name__ == '__main__':
 
     spark.sql("select * from finances order by amount").show(5, False)
 
-    spark.sql("select * from finances group by Description").show(5, False)
+ #   spark.sql("select * from finances group by Description").show(5, False)
 
     spark.sql("select * from finances where amount >100").show(5, False)
 
