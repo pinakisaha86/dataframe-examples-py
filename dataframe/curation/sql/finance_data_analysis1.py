@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
     spark.sql("select concat_ws(' - ', AccountNumber, Description) as Account_Details from finances").show(5, False)
 
-    spark.sql("select * from finances where amount between 100 and 200 group by amount").show(5, False)
+    spark.sql("select * from finances where amount between 100 and 200 order by amount").show(5, False)
 
     spark.sql("select * from finances where amount >100 group by Description").show(5, False)
 
