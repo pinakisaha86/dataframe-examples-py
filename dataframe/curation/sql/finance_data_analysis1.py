@@ -36,4 +36,6 @@ if __name__ == '__main__':
     finance_df.printSchema()
     finance_df.show(5, False)
 
+    finance_df = spark.sql("select * from finances order by amount").show(5, False)
+
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/curation/sql/finance_data_analysis1.py
