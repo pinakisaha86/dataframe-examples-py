@@ -41,6 +41,6 @@ if __name__ == '__main__':
 
     spark.sql("select concat_ws(' - ', AccountNumber, Description) as Account_Details from finances").show(5, False)
 
-    spark.sql("select * from finances where amount is greater than 100").show(5, False)
+    spark.sql("select * from finances where amount > 100").show(5, False)
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/curation/sql/finance_data_analysis1.py
