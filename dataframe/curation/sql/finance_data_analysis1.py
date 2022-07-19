@@ -38,6 +38,7 @@ if __name__ == '__main__':
     finance_df.createOrReplaceTempView("finances")
 
     spark.sql("select * from finances order by amount").show(5, False)
-    spark.sql("select concat_ws(' - ', AccountNumber, Description) as Account_Details from finances)
+
+    spark.sql("select concat_ws(' - ', AccountNumber, Description) as Account_Details from finances").show(5, False)
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/curation/sql/finance_data_analysis1.py
