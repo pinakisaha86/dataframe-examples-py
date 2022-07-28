@@ -48,7 +48,7 @@ rem_dup =df2.dropDuplicates(subset=["email_id","create_time"])
 
 rem_dup.show(20,False)
 
-new_dup =df2.dropDuplicates("email_id")
+new_dup =df2.dropDuplicates(["email_id"])
 new_dup.show(20, False)
 
 fin_df= rem_dup.filter(col("email_id").contains("punit"))
