@@ -51,7 +51,7 @@ rem_dup.show(20,False)
 new_dup =df2.dropDuplicates(["email_id"])
 new_dup.show(20, False)
 
-copy_res =df2.withColumn("Phone", col('mobile'))
+copy_res =new_dup.withColumn("Phone", col('mobile'))
 copy_res.show(10,False)
 
 fin_df= rem_dup.filter(col("email_id").contains("punit"))
