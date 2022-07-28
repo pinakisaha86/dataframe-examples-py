@@ -54,7 +54,18 @@ if __name__ == '__main__':
             raw_finances
           """)\
         .createOrReplaceTempView("finances1")
-    financeDf.show(5,False)
+
+    spark.sql("""
+              select
+                AccountNumber,
+                Amount,
+                Date,
+                Description,
+                avg(Amount) over (partition by AccountNumber order by Date rows between 4 preceding and 0 following) as RollingAvg
+              from
+                finances1
+              """) \
+        .show(5, False)
 
 # finance_df= spark.sql("select * from raw_finances order by amount")
 # finance_df.repartition(1)\
