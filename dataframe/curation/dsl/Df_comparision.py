@@ -30,6 +30,11 @@ df2 = df2.withColumn('FLAG',lit('DF2'))
 # Concatenate the two DataFrames, to create one big dataframe.
 df = df1.union(df2)
 
+#window func to identify the duplicates
+
+my_window = Window.partitionBy('No','Name','Sal','Address','Dept','Join_Date').rowsBetween(-sys.maxsize, sys.maxsize)
+df = df.withColumn('FLAG', when((count('*').over(my_window) > 1),'SAME').otherwise(col('FLAG'))).dropDuplicates()
 df.show()
+
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/curation/dsl/Df_comparision.py
