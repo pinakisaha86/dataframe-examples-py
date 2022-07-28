@@ -40,9 +40,9 @@ if __name__ == '__main__':
    # finance_df.orderBy("Date").show(6)
    # finance_df.groupBy("AccountNumber").orderBy("Date").show(6)
 
-#finance_df= spark.sql("select * from finances order by amount LIMIT 5").show()
+#finance_df= spark.sql("select * from raw_finances order by amount LIMIT 5").show()
 
-#finance_df=spark.sql("select count(*) from finances").show()
+#finance_df=spark.sql("select count(*) from raw_finances").show()
 
     spark.sql("""
           select
