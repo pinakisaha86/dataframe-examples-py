@@ -33,7 +33,7 @@ if __name__ == '__main__':
 
     fin_file_path = "s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/finances-small"
     finance_df = spark.read.parquet(fin_file_path)
-    finance_df.createOrReplaceTempView("finances")
+    finance_df.createOrReplaceTempView("raw_finances")
     finance_df.printSchema()
 
 
@@ -43,13 +43,38 @@ if __name__ == '__main__':
 #finance_df= spark.sql("select * from finances order by amount LIMIT 5").show()
 
 #finance_df=spark.sql("select count(*) from finances").show()
-finance_df= spark.sql("select * from finances order by amount")
+
+    spark.sql("""
+          select
+            AccountNumber,
+            Amount,
+            to_date(cast(unix_timestamp(Date, 'MM/dd/yyyy') as timestamp)) as Date,
+            Description
+          from
+            raw_finances
+          """)\
+        .createOrReplaceTempView("finances1")
+
+
+finance_df= spark.sql("select * from raw_finances order by amount")
 finance_df.repartition(1)\
     .write\
     .mode("overwrite")\
     .option("header","true")\
     .option("delimiter","|")\
     .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin_out3")
+
+# spark.sql("""
+#           select
+#             AccountNumber,
+#             Amount,
+#             Date,
+#             Description,
+#             avg(Amount) over (partition by AccountNumber order by Date rows between 4 preceding and 0 following) as RollingAvg
+#           from
+#             finances
+#           """)\
+#         .show(5, False)
 
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/curation/sql/spark_sql_prac.py
