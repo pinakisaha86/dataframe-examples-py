@@ -52,6 +52,8 @@ role_df = spark.createDataFrame([
 ])
 role_df.createOrReplaceTempView("role")
 
+role_df.show()
+
 spark.sql('select a.*, b.* from emp a join role b on a.id = b.id').show(5, False)
 
 spark.sql("select a.*, b.* from emp a inner join role b on a.id = b.id").show()
