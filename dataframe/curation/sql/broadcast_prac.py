@@ -30,5 +30,28 @@ e = broadcast(products)
 
 f = prod.join(broadcast(e),prod.Add == e.Add)
 f.show()
+##########################
+
+emp_df = spark.createDataFrame([
+    Employee(1, "Sidhartha", "Ray"),
+    Employee(2, "Pratik", "Solanki"),
+    Employee(3, "Ashok", "Pradhan"),
+    Employee(4, "Rohit", "Bhangur"),
+    Employee(5, "Kranti", "Meshram"),
+    Employee(7, "Ravi", "Kiran")
+])
+emp_df.createOrReplaceTempView("emp")
+
+role_df = spark.createDataFrame([
+    Role(1, "Architect"),
+    Role(2, "Programmer"),
+    Role(3, "Analyst"),
+    Role(4, "Programmer"),
+    Role(5, "Architect"),
+    Role(6, "CEO")
+])
+role_df.createOrReplaceTempView("role")
+
+spark.sql('select a.*, b.* from emp a join role b on a.id = b.id').show(5, False)
 
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/curation/sql/broadcast_prac.py
