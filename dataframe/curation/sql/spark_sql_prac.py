@@ -44,7 +44,7 @@ finance_df= spark.sql("select * from raw_finances order by amount LIMIT 5").show
 
 #finance_df=spark.sql("select count(*) from raw_finances").show()
 
-finance_df=spark.sql("""
+    spark.sql("""
           select
             AccountNumber,
             Amount,
