@@ -54,15 +54,15 @@ if __name__ == '__main__':
             raw_finances
           """)\
         .createOrReplaceTempView("finances1")
+    financeDf.show(5,False)
 
-
-finance_df= spark.sql("select * from raw_finances order by amount")
-finance_df.repartition(1)\
-    .write\
-    .mode("overwrite")\
-    .option("header","true")\
-    .option("delimiter","|")\
-    .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin_out3")
+# finance_df= spark.sql("select * from raw_finances order by amount")
+# finance_df.repartition(1)\
+#     .write\
+#     .mode("overwrite")\
+#     .option("header","true")\
+#     .option("delimiter","|")\
+#     .csv("s3a://" + app_conf["s3_conf"]["s3_bucket"] + "/fin_out3")
 
 # spark.sql("""
 #           select
