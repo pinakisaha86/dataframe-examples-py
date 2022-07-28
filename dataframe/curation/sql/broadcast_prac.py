@@ -26,4 +26,9 @@ prod = spark.createDataFrame(data2)
 
 prod.show()
 
+e = broadcast(products)
+
+f = prod.join(broadcast(e)),prod.Add == e.add)
+f.show()
+
 # spark-submit --packages "org.apache.hadoop:hadoop-aws:2.7.4" dataframe/curation/sql/broadcast_prac.py
