@@ -4,6 +4,7 @@ from pyspark.sql.functions import lit, count, col, when
 from pyspark.sql.window import Window
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import broadcast
+from pyspark.sql import SQLContext
 
 if __name__ == '__main__':
     # Create the SparkSession
