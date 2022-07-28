@@ -61,7 +61,7 @@ if __name__ == '__main__':
                 Amount,
                 Date,
                 Description,
-                avg(Amount) over (partition by AccountNumber order by Date rows between 4 preceding and 0 following) as RollingAvg
+                avg(Amount) over (partition by AccountNumber order by Date rows between 2 preceding and 0 following) as RollingAvg
               from
                 finances1
               """) \
