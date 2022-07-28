@@ -29,7 +29,7 @@ df2 = df2.withColumn('FLAG',lit('DF2'))
 
 # Concatenate the two DataFrames, to create one big dataframe.
 df = df1.union(df2)
-
+df.show()
 #window func to identify the duplicates
 
 my_window = Window.partitionBy('No','Name','Sal','Address','Dept','Join_Date').rowsBetween(-sys.maxsize, sys.maxsize)
