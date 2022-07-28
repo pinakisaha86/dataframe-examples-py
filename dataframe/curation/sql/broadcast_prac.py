@@ -55,7 +55,7 @@ role_df.createOrReplaceTempView("role")
 spark.sql('select a.*, b.* from emp a join role b on a.id = b.id').show(5, False)
 
 spark.sql("select a.*, b.* from emp a inner join role b on a.id = b.id").show()
-    emp_df.join(role_df, [emp_df["id"] == role_df["id"]], "right_outer").show()
+#emp_df.join(role_df, [emp_df["id"] == role_df["id"]], "right_outer").show()
  #   emp_df.join(role_df, [emp_df["id"] == role_df["id"]], "left_anti").show()
  #   emp_df.join(role_df, [emp_df["id"] == role_df["id"]], "full").show()
 
