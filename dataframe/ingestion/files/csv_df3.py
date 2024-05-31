@@ -49,7 +49,7 @@ rem_dup =df2.dropDuplicates(subset=["email_id","create_time"])
 rem_dup.show(20,False)
 
 new_dup =df2.dropDuplicates(["email_id"])
-new_dup.show(20, False)
+new_dup.show(30, False)
 
 copy_res =new_dup.withColumn("Phone", col('mobile'))
 copy_res.show(10,False)
